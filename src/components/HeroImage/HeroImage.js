@@ -4,7 +4,7 @@ import "./HeroImage.css";
 const HeroImage = props => {
   const image = props.image;
   const divStyle = {
-    background: `url('${image}') no-repeat center center fixed`,
+    background: `url('${image}') no-repeat fixed`,
     backgroundSize: "cover"
   };
 

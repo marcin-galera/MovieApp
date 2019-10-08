@@ -1,5 +1,17 @@
 .heroContainer {
   background-size: cover;
   background-repeat: no-repeat;
-  height: 500px;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+h1 {
+  font-size: 3.5rem;
+}
+
+p {
+  font-size: 2rem;
 }
