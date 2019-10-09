@@ -38,10 +38,10 @@ class Home extends Component {
       searchTerm
     });
 
-    if (seatchTerm === "") {
+    if (searchTerm === "") {
       endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=pl-PL&page=1`;
     } else {
-      endpoint = `${API_URL}search/movie?api_key${API_KEY}$language=pl-PL&query=${searchTerm}`;
+      endpoint = `${API_URL}search/movie?api_key=${API_KEY}&language=pl-PL&query=${searchTerm}`;
     }
     this.fetchItems(endpoint);
   };
@@ -51,7 +51,7 @@ class Home extends Component {
     this.setState({ loading: true });
 
     if (this.state.searchTerm === "") {
-      endpoint = `${API_URL}movie/popular/?api_key${API_KEY}$language=pl-PL&page=${this
+      endpoint = `${API_URL}movie/popular/?api_key=${API_KEY}$language=pl-PL&page=${this
         .state.currentPage + 1}`;
     } else {
       endpoint = `${API_URL}search/movie?api_key=${API_KEY}&language=pl-PL&query${
@@ -65,6 +65,7 @@ class Home extends Component {
     fetch(endpoint)
       .then(response => response.json())
       .then(data => {
+        console.log(data);
         this.setState({
           movies: [...this.state.movies, ...data.results],
           heroImage: this.state.heroImage || data.results[0],
@@ -85,10 +86,33 @@ class Home extends Component {
               title={this.state.heroImage.original_title}
               text={this.state.heroImage.overview}
             />
-            <SearchBar />
+            <SearchBar callback={this.searchItems} />
           </div>
         ) : null}
-        <HomeLayer />
+        <div className="home-grid">
+          <HomeLayer
+            header={
+              this.state.searchTerm ? "Wyniki wyszukania" : "Popularne filmy"
+            }
+            loading={this.state.loading}
+          >
+            {this.state.movies.map((element, i) => {
+              return (
+                <MovieThumb
+                  key={i}
+                  clickable={true}
+                  image={
+                    element.poster_path
+                      ? `${IMAGE_BASE_URL}${POSTER_SIZE}${element.poster_path}`
+                      : null
+                  }
+                  movieId={element.id}
+                  movieName={element.original_title}
+                />
+              );
+            })}
+          </HomeLayer>
+        </div>
         <Spinner />
         <LoadMoreButton />
       </div>

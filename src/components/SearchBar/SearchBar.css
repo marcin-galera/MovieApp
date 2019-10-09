@@ -1,0 +1,24 @@
+.searchBar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  background-color: black;
+}
+
+.searchBar-content {
+  margin-left: 10px;
+  border: 1px solid white;
+  border-radius: 5px;
+  height: 40px;
+  width: 40%;
+}
+
+.searchBar-input {
+  margin-left: 10px !important;
+}
+
+.search {
+  margin-right: 10px !important;
+}
