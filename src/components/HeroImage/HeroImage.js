@@ -5,7 +5,9 @@ const HeroImage = props => {
   const image = props.image;
   const divStyle = {
     background: `url('${image}') no-repeat fixed`,
-    backgroundSize: "cover"
+    backgroundSize: "cover",
+    backgroundAttachment: "fixed",
+    backgroundPosition: "center"
   };
 
   return (
